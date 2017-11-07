@@ -14,9 +14,9 @@ class GPS_Print(object):
 
 	def convertTODMS(lat):
 		dd = int(lat)
-		mm = int(lat-int(lat) * 60)
-		ss = ((lat-int(lat)*60) - mm) * 60
-		return 'Degrees: ' + dd + 'minutes: ' + mm + 'seconds: ' + ss
+		mm = int((lat-int(lat))*60)
+		ss = (((lat-int(lat))*60) - mm) * 60
+		return ' Degrees: ' + str(dd) + ' minutes: ' + str(mm) + ' seconds: ' + str(ss)
 	
 	def GPS_Print(self, gpsd):
 			#os.system('clear')
