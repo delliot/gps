@@ -1,3 +1,24 @@
+'''
+/*------------------------------------------------------------------------------------------------------------------
+-- SOURCE FILE:		main.py - starts the program
+-- PROGRAM:			GPSDPython
+--
+-- FUNCTIONS:
+--					main()
+--
+--
+-- DATE:			November 7, 2017
+--
+-- REVISIONS:		N/A
+--
+-- DESIGNER:		Delan Elliot, Roger Zhang
+--
+-- PROGRAMMER:		Delan Elliot, Roger Zhang
+--
+-- NOTES:
+-- Main function. Sets up the reader/printer and GPS receiver.
+----------------------------------------------------------------------------------------------------------------------*/
+'''
 import os
 from gps import *
 from time import *
@@ -6,6 +27,29 @@ import threading
 import config
 import GPS_Start
 import GPS_Print
+
+'''
+/*------------------------------------------------------------------------------------------------------------------
+-- SOURCE FILE:		main.py - starts the program
+-- PROGRAM:			GPSDPython
+--
+-- FUNCTIONS:
+--					int main(int argc, char *argv[])
+--
+--
+-- DATE:			November 7, 2017
+--
+-- REVISIONS:		N/A
+--
+-- DESIGNER:		Delan Elliot, Roger Zhang
+--
+-- PROGRAMMER:		Delan Elliot, Roger Zhang
+--
+-- NOTES:
+-- Main function. Start up the program and creates a new thread for GPS reading. 
+-- Print the gps coordinates every 5 seconds until Ctrl-C is pressed to exit.
+----------------------------------------------------------------------------------------------------------------------*/
+'''
 
 def main():
 	global gpsd

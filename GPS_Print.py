@@ -1,3 +1,25 @@
+'''
+/*------------------------------------------------------------------------------------------------------------------
+-- SOURCE FILE:		GPS_Print.py - prints the GPS data
+-- PROGRAM:			GPSDPython
+--
+-- FUNCTIONS:
+--					init(self)
+--					convertTODMS(float)
+--					GPS_Print(self, GPS_Object)
+--
+-- DATE:			November 7, 2017
+--
+-- REVISIONS:		N/A
+--
+-- DESIGNER:		Delan Elliot, Roger Zhang
+--
+-- PROGRAMMER:		Delan Elliot, Roger Zhang
+--
+-- NOTES:
+-- 
+----------------------------------------------------------------------------------------------------------------------*/
+'''
 import os
 from gps import *
 from time import *
