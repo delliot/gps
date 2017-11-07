@@ -27,23 +27,21 @@ import threading
 import config
 import GPS_Start
 import GPS_Print
-
 '''
-/*------------------------------------------------------------------------------------------------------------------
--- SOURCE FILE:		main.py - starts the program
--- PROGRAM:			GPSDPython
---
--- FUNCTIONS:
---					int main(int argc, char *argv[])
---
+/*--------------------------------------------------------------------------------------------------------------------
+-- FUNCTION:		main
 --
 -- DATE:			November 7, 2017
 --
 -- REVISIONS:		N/A
 --
--- DESIGNER:		Delan Elliot, Roger Zhang
+-- DESIGNER:		Delan Elliot and Roger Zhang
 --
--- PROGRAMMER:		Delan Elliot, Roger Zhang
+-- PROGRAMMER:		Delan Elliot and Roger Zhang
+--
+-- INTERFACE:		main()
+--
+-- RETURNS:			void
 --
 -- NOTES:
 -- Main function. Start up the program and creates a new thread for GPS reading. 
