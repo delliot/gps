@@ -27,6 +27,7 @@ import time
 import threading
 import tkinter
 import config
+from numpy import *
 import math
 
 class GPS_Print(object):
@@ -140,3 +141,19 @@ class GPS_Print(object):
 		        	print ('\t', i)
 ''' 
 
+def toWebMercator(xLon, yLat):
+	m_lon = deg2rad(xLon)
+	m_lat= deg2rad(yLat)
+
+
+	x = int((256 / pi) * 2 * (m_lon + pi))
+	y = int(((256 / pi) * 2) * (pi - log((tan(pi / 4 + m_lat / 2)))))
+
+	return x, y
+
+def plotOnCanvas(canvas, x, y):
+
+	pixels = toWebMercator(x, y)
+	center = toWebMercator(0,0)
+	pos = int(pixels[0] - center[0] + 500), int(pixels[1] - center[1] + 256)
+	canvas.create_oval(pos[0], pos[1], pos[0] + 20, pos[1] + 20)
