@@ -53,7 +53,7 @@ class GPS_Start(threading.Thread):
 	def __init__(self):
 		super(GPS_Start, self).__init__()
 		print ("starting gps")
-		config.gpsd = gps(mode=WATCH_ENABLE)
+		#config.gpsd = gps(mode=WATCH_ENABLE)
 		self.running = True
 		
 	'''
