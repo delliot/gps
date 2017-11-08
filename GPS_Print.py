@@ -136,8 +136,8 @@ class GPS_Print(object):
 		config.textBox.delete('1.0', tkinter.END)
 		config.textBox.insert(tkinter.END, '----------GPS data----------')
 		config.textBox.insert(tkinter.END, 'Time (UTC):    ' + data.TPV['time'] + '\n')
-		config.textBox.insert(tkinter.END, 'Latitude: ' + self.convertToDMS(data.TPV['lat']) + '\n')
-		config.textBox.insert(tkinter.END, 'Longitude: ' + self.convertToDMS(data.TPV['lon']) + '\n')
+		config.textBox.insert(tkinter.END, 'Latitude: ' + self.convertToDMS(data.TPV['lat'], 0) + '\n')
+		config.textBox.insert(tkinter.END, 'Longitude: ' + self.convertToDMS(data.TPV['lon'], 1) + '\n')
 		config.textBox.insert(tkinter.END, 'Elevation (m): ', data.TPV['alt'] + '\n')
 
 		if isinstance(data.SKY['satellites'], list):
