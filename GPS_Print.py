@@ -111,6 +111,7 @@ class GPS_Print(object):
 	----------------------------------------------------------------------------------------------------------------------*/
 	'''
 	def updateGui(self, data):
+		print('----------GPS Data----------')
 		print('Time: ', data.TPV['time'])
 		print('Latitude: ', self.convertToDMS(data.TPV['lat'], 0))
 		print('Longitude: ', self.convertToDMS(data.TPV['lon'], 1))
@@ -118,7 +119,7 @@ class GPS_Print(object):
 		print('Speed (m/s): ', data.TPV['speed'])
 		print('Climb: ', data.TPV['climb'])
 		print('Satellites:')
-		if isinstance(data_stream.SKY['satellites'], list):
+		if isinstance(data.SKY['satellites'], list):
 			for i in data.SKY['satellites']:
 				print('\t', i)
 		else
@@ -130,6 +131,10 @@ class GPS_Print(object):
 		config.textBox.delete('1.0', tkinter.END)
 		config.textBox.insert(tkinter.END, '----------GPS data----------')
 		config.textBox.insert(tkinter.END, 'Time (UTC):    ' + data.TPV['time'])
+		config.textBox.insert(tkinter.END, 'Latitude: ', self.convertToDMS(data.TPV['lat'], 0))
+		config.textBox.insert(tkinter.END, 'Longitude: ', self.convertToDMS(data.TPV['lon'], 1))
+		config.textBox.insert(tkinter.END, 'Elevation (m): ', data.TPV['alt'])
+		config.textBox.insert(tkinter.END, 'Satellites: ', data.SKY['satellites'])
 		config.textBox.configure(state="disabled")
 
 def toWebMercator(xLon, yLat):
