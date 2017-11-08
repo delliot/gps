@@ -20,7 +20,7 @@
 ----------------------------------------------------------------------------------------------------------------------*/
 '''
 import os
-import gps3
+from gps3 import gps3
 from time import *
 import time
 import tkinter
