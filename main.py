@@ -66,16 +66,13 @@ def main():
 	window.add(canvas)
 	window.add(text)
 
-	printGPS = GPS_Print.GPS_Print()
+	config.gui = GPS_Print.GPS_Print()
 	readThread = GPS_Start.GPS_Start()
 	readThread.start()
-	printGPS.start()
 
 	top.mainloop()
 
 	readThread.running = False
-	printGPS.running = False
-	printGPS.join()
 	readThread.join()
 
 if __name__=="__main__":

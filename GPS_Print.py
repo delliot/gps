@@ -29,7 +29,7 @@ import tkinter
 import config
 import math
 
-class GPS_Print(threading.Thread):
+class GPS_Print(object):
 	'''
 	/*--------------------------------------------------------------------------------------------------------------------
 	-- FUNCTION:		__init__
@@ -52,8 +52,8 @@ class GPS_Print(threading.Thread):
 	'''
 	"""docstring for GPS_Print"""
 	def __init__(self):
-		super(GPS_Print, self).__init__()
-		self.running = True
+		print("starting")
+
 
 	'''
 	/*--------------------------------------------------------------------------------------------------------------------
@@ -109,10 +109,9 @@ class GPS_Print(threading.Thread):
 	-- This is the printing method that prints out the gps coordinates and data.
 	----------------------------------------------------------------------------------------------------------------------*/
 	'''
-	def run(self, gpsd):
-		while self.running:
-			print('time: ', config.stream.TPV['time'])
-			print('Lat: ', config.stream.TPV['lat'])
+	def updateGui(data):
+		print('time: ', data.TPV['time'])
+		print('Lat: ', data.stream.TPV['lat'])
 '''
                     os.system('clear')
 			config.textBox.configre(state="ENABLED")

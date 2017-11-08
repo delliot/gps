@@ -55,6 +55,9 @@ class GPS_Start(threading.Thread):
 		print ("starting gps")
 		#config.gpsd = gps(mode=WATCH_ENABLE)
 		self.running = True
+		config.socket = gps3.GPSDSocket()
+		config.stream = gps3.DataStream()
+
 		
 	'''
 	/*--------------------------------------------------------------------------------------------------------------------
@@ -78,7 +81,15 @@ class GPS_Start(threading.Thread):
 	----------------------------------------------------------------------------------------------------------------------*/
 	'''
 	def run(self):
-		while self.running:
-			if config.gpsd.waiting():
-				config.gpsd.next()
-			time.sleep(2)
+
+		config.socket.connect()
+		config.socket.watch()
+
+		for data in config.socket:
+			if not self.running:
+				break
+			if data:
+				config.stream.unpack(data)
+				config.gui.updateGui(config.stream)
+			time.sleep(1)
+
