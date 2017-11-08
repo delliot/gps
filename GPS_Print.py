@@ -116,11 +116,13 @@ class GPS_Print(object):
 		if data.TPV['lat'] != "n/a" and data.TPV['lon'] != "n/a":
 			plotOnCanvas(config.canvas, data.TPV['lon'], data.TPV['lat'])
 
-'''
-                    os.system('clear')
-			config.textBox.configre(state="ENABLED")
-			config.textBox.add('----------GPS data----------')
-			config.textBox.add('Time (UTC):    ', gpsd.utc, ' + ', gpsd.fix.time)
+
+            
+			config.textBox.configre(state="NORMAL")
+			config.textBox.add(tkinter.END, '----------GPS data----------')
+			config.textBox.add(tkinter.END, 'Time (UTC):    ' + data.TPV['time'])
+			config.textBox.configre(state="DISABLED")
+		'''
 			config.textBox.add('Latitude:    ', self.convertTODMS(gpsd.fix.latitude))
 			config.textBox.add('Longitude:   ', self.convertTODMS(gpsd.fix.longitude))
 			config.textBox.add('Elevation (m): ', gpsd.fix.altitude)
@@ -128,7 +130,7 @@ class GPS_Print(object):
 			for i in gpsd.satellites:
 				config.textBox.add('\t', i)
 
-			config.textBox.configre(state="DISABLED")
+			
 			time.sleep(.5)
 
 	        	print ('----------GPS data----------')
