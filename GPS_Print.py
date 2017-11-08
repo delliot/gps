@@ -111,6 +111,8 @@ class GPS_Print(object):
 		print 'Longitude:   ' , self.convertTODMS(gpsd.fix.longitude)
 		print 'Elevation (m): ' , gpsd.fix.altitude
 		print 'Satellites: ' , gpsd.satellites
+		for i in gpsd.satellites:
+			print '\t', i
 		#print 'PRN: ' , gpsd.fix.PRN
 		#print 'Azimuth: ' , gpsd.fix.Azimuth
 		#print 'SNR: ' , gpsd.fix.SNR
