@@ -109,9 +109,9 @@ class GPS_Print(object):
 	-- This is the printing method that prints out the gps coordinates and data.
 	----------------------------------------------------------------------------------------------------------------------*/
 	'''
-	def updateGui(data):
+	def updateGui(self, data):
 		print('time: ', data.TPV['time'])
-		print('Lat: ', data.stream.TPV['lat'])
+		print('Lat: ', data.TPV['lat'])
 '''
                     os.system('clear')
 			config.textBox.configre(state="ENABLED")
