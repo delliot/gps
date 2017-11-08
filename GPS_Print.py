@@ -112,8 +112,8 @@ class GPS_Print(object):
 	'''
 	def updateGui(self, data):
 		print('Time: ', data.TPV['time'])
-		print('Latitude: ', self.convertTODMS(data.TPV['lat'], 0)
-		print('Longitude: ', self.convertToDMS(data.TPV['lon'], 1)
+		print('Latitude: ', self.convertTODMS(data.TPV['lat'], 0))
+		print('Longitude: ', self.convertToDMS(data.TPV['lon'], 1))
 		print('Elevation (m): ', data.TPV['alt'])
 		print('Speed (m/s): ', data.TPV['speed'])
 		print('Climb: ', data.TPV['climb'])
