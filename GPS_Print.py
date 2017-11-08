@@ -113,9 +113,9 @@ class GPS_Print(object):
 	def updateGui(self, data):
 		print('time: ', data.TPV['time'])
 		print('Lat: ', data.TPV['lat'])
+		if data.TPV['lat'] != "n/a" and data.TPV['lon'] != "n/a":
+			plotOnCanvas(config.canvas, data.TPV['lon'], data.TPV['lat'])
 
-		plotOnCanvas(config.canvas, data.TPV['lon'], data.TPV['lat'])
-		
 '''
                     os.system('clear')
 			config.textBox.configre(state="ENABLED")
