@@ -120,8 +120,8 @@ class GPS_Print(object):
 
 		config.textBox.configure(state="normal")
 		config.textBox.delete('1.0', tkinter.END)
-		config.textBox.add(tkinter.END, '----------GPS data----------')
-		config.textBox.add(tkinter.END, 'Time (UTC):    ' + data.TPV['time'])
+		config.textBox.insert(tkinter.END, '----------GPS data----------')
+		config.textBox.insert(tkinter.END, 'Time (UTC):    ' + data.TPV['time'])
 		config.textBox.configure(state="disabled")
 
 		'''
