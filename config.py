@@ -1,5 +1,6 @@
 gpsd = None
 textBox = None
+canvas = None
 socket = None
 stream = None
 gui = None

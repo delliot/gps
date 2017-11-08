@@ -61,6 +61,7 @@ def main():
 	text = tkinter.Text(top)
 	text.configure(state="disabled")
 	config.textBox = text
+	config.canvas = canvas
 
 
 	window.add(canvas)
