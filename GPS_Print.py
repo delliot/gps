@@ -78,7 +78,7 @@ class GPS_Print(object):
 	----------------------------------------------------------------------------------------------------------------------*/
 	'''
 	def convertTODMS(self, lat, latlong):
-		if not math.isnan(lat):
+		if not math.isnan(float(lat)):
 			directionLat = ''
 			if latlong == 0:
 				directionLat = ' N' if lat > 0 else ' S'
