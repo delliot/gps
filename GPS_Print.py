@@ -117,11 +117,13 @@ class GPS_Print(object):
 			plotOnCanvas(config.canvas, data.TPV['lon'], data.TPV['lat'])
 
 
-            
-			config.textBox.configre(state="NORMAL")
-			config.textBox.add(tkinter.END, '----------GPS data----------')
-			config.textBox.add(tkinter.END, 'Time (UTC):    ' + data.TPV['time'])
-			config.textBox.configre(state="DISABLED")
+
+		config.textBox.configre(state="NORMAL")
+		config.textBox.delete('1.0', tkinter.END)
+		config.textBox.add(tkinter.END, '----------GPS data----------')
+		config.textBox.add(tkinter.END, 'Time (UTC):    ' + data.TPV['time'])
+		config.textBox.configre(state="DISABLED")
+
 		'''
 			config.textBox.add('Latitude:    ', self.convertTODMS(gpsd.fix.latitude))
 			config.textBox.add('Longitude:   ', self.convertTODMS(gpsd.fix.longitude))
