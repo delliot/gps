@@ -21,7 +21,7 @@
 ----------------------------------------------------------------------------------------------------------------------*/
 '''
 import os
-from gps import *
+import gps3
 from time import *
 import time
 import threading

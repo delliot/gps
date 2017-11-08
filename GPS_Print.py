@@ -21,7 +21,7 @@
 ----------------------------------------------------------------------------------------------------------------------*/
 '''
 import os
-from gps import *
+import gps3
 from time import *
 import time
 import threading
@@ -79,9 +79,9 @@ class GPS_Print(threading.Thread):
 	def convertTODMS(self, lat, latlong):
 		if not math.isnan(lat):
 			directionLat = ''
-			if latlong == 0
+                        if latlong == 0:
 				directionLat = ' N' if lat > 0 else ' S'
-			else
+                        else:
 				directionLat = ' E' if lat > 0 else ' W'
 			dd = int(lat)
 			mm = int((lat-int(lat))*60)
