@@ -87,7 +87,7 @@ class GPS_Print(object):
 			dd = int(lat)
 			mm = int((lat-int(lat))*60)
 			ss = (((lat-int(lat))*60) - mm) * 60
-			return str('Degrees: ' + str(dd) + ' minutes: ' + str(mm) + ' seconds: ' + str(ss) + directionLat)
+			return str('Degrees: ' + str(abs(dd)) + ' minutes: ' + str(abs(mm)) + ' seconds: ' + str(abs(ss)) + directionLat)
 		else:
 			return str('not available')
 
@@ -134,16 +134,17 @@ class GPS_Print(object):
 
 		config.textBox.configure(state="normal")
 		config.textBox.delete('1.0', tkinter.END)
-		config.textBox.insert(tkinter.END, '----------GPS data----------')
+		config.textBox.insert(tkinter.END, '----------GPS data----------\n')
 		config.textBox.insert(tkinter.END, 'Time (UTC):    ' + data.TPV['time'] + '\n')
 		config.textBox.insert(tkinter.END, 'Latitude: ' + self.convertToDMS(data.TPV['lat'], 0) + '\n')
 		config.textBox.insert(tkinter.END, 'Longitude: ' + self.convertToDMS(data.TPV['lon'], 1) + '\n')
-		config.textBox.insert(tkinter.END, 'Elevation (m): ', data.TPV['alt'] + '\n')
+		config.textBox.insert(tkinter.END, 'Elevation (m): ' + str(data.TPV['alt']) + '\n')
 
 		if isinstance(data.SKY['satellites'], list):
 			config.textBox.insert(tkinter.END, 'Satellites: \n')
 			for s in data.SKY['satellites']:
-				config.textBox.insert(tkinter.END, s + '\n')
+				config.textBox.insert(tkinter.END, str(s) + '\n')
+
 		else:
 			config.textBox.insert(tkinter.END, 'No Satellites \n')
 		config.textBox.configure(state="disabled")
