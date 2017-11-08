@@ -37,7 +37,7 @@ import GPS_Print
 --
 -- DESIGNER:		Delan Elliot and Roger Zhang
 --
--- PROGRAMMER:		Delan Elliot and Roger Zhang
+-- PROGRAMMER:		Delan Elliot
 --
 -- INTERFACE:		main()
 --
@@ -45,12 +45,11 @@ import GPS_Print
 --
 -- NOTES:
 -- Main function. Start up the program and creates a new thread for GPS reading. 
--- Print the gps coordinates every 5 seconds until Ctrl-C is pressed to exit.
+-- Print the gps coordinates every half a second until Ctrl-C is pressed to exit.
 ----------------------------------------------------------------------------------------------------------------------*/
 '''
 
 def main():
-	global gpsd
 	print('START')
 
 	top = tkinter.Tk()

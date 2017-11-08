@@ -40,7 +40,7 @@ class GPS_Print(threading.Thread):
 	--
 	-- DESIGNER:		Delan Elliot and Roger Zhang
 	--
-	-- PROGRAMMER:		Delan Elliot and Roger Zhang
+	-- PROGRAMMER:		Roger Zhang
 	--
 	-- INTERFACE:		__init__(self)
 	--
@@ -65,25 +65,30 @@ class GPS_Print(threading.Thread):
 	--
 	-- DESIGNER:		Delan Elliot and Roger Zhang
 	--
-	-- PROGRAMMER:		Delan Elliot and Roger Zhang
+	-- PROGRAMMER:		Roger Zhang
 	--
 	-- INTERFACE:		convertTODMS(float)
 	--
 	-- RETURNS:			String
 	--
 	-- NOTES:
-	-- This is the conversion function that converts the latitude/longitude to Degrees
-	-- Minutes and Seconds.
+	-- This is the conversion function that converts the latitude/longitude to Degrees,
+	-- Minutes, Seconds and directions.
 	----------------------------------------------------------------------------------------------------------------------*/
 	'''
-	def convertTODMS(self, lat):
+	def convertTODMS(self, lat, latlong):
 		if not math.isnan(lat):
+			directionLat = ''
+			if latlong == 0
+				directionLat = ' N' if lat > 0 else ' S'
+			else
+				directionLat = ' E' if lat > 0 else ' W'
 			dd = int(lat)
 			mm = int((lat-int(lat))*60)
 			ss = (((lat-int(lat))*60) - mm) * 60
-			print 'Degrees: ' + str(dd) + ' minutes: ' + str(mm) + ' seconds: ' + str(ss)
+			print ('Degrees: ' + str(dd) + ' minutes: ' + str(mm) + ' seconds: ' + str(ss) + directionLat)
 		else:
-			print 'not available'
+			print ('not available')
 	'''
 	/*--------------------------------------------------------------------------------------------------------------------
 	-- FUNCTION:		GPS_Print
@@ -94,7 +99,7 @@ class GPS_Print(threading.Thread):
 	--
 	-- DESIGNER:		Delan Elliot and Roger Zhang
 	--
-	-- PROGRAMMER:		Delan Elliot and Roger Zhang
+	-- PROGRAMMER:		Roger Zhang
 	--
 	-- INTERFACE:		GPS_Print(self, GPS_Object)
 	--
@@ -106,22 +111,8 @@ class GPS_Print(threading.Thread):
 	'''
 	def run(self, gpsd):
 		while self.running:
-			os.system('clear')
-			print '----------GPS data----------'
-			print 'Time (UTC):    ', gpsd.utc, ' + ', gpsd.fix.time
-			print 'Latitude:    ', self.convertTODMS(gpsd.fix.latitude)
-			print 'Longitude:   ', self.convertTODMS(gpsd.fix.longitude)
-			print 'Elevation (m): ', gpsd.fix.altitude
-			print 'Satellites: ', gpsd.satellites
-			for i in gpsd.satellites:
-				print '\t', i
-			# print 'PRN: ' , gpsd.fix.PRN
-			# print 'Azimuth: ' , gpsd.fix.Azimuth
-			# print 'SNR: ' , gpsd.fix.SNR
-			# print 'Used flag: ' , gpsd.fix.used
-
-
-			config.textBox.delete(1.0,tkinter.END)
+'''
+                    os.system('clear')
 			config.textBox.configre(state="ENABLED")
 			config.textBox.add('----------GPS data----------')
 			config.textBox.add('Time (UTC):    ', gpsd.utc, ' + ', gpsd.fix.time)
@@ -135,6 +126,17 @@ class GPS_Print(threading.Thread):
 			config.textBox.configre(state="DISABLED")
 			time.sleep(.5)
 
-
-
-
+	        	print ('----------GPS data----------')
+	        	print ('Time (UTC):    ' , gpsd.utc,' + ', gpsd.fix.time)
+	        	print ('Latitude:    ' , self.convertTODMS(gpsd.fix.latitude, 0))
+	        	print ('Longitude:   ' , self.convertTODMS(gpsd.fix.longitude, 1))
+	        	print ('Elevation (m): ' , gpsd.fix.altitude)
+	        	print ('Speed m/s      ' , gpsd.fix.speed)
+	        	print ('Climb          ' , gpsd.fix.climb)
+	        	print ('Track          ' , gpsd.fix.track)
+	        	print ('Mode           ' , gpsd.fix.mode)
+	        	for i in gpsd.satellites:
+		        	print ('\t', i)
+''' 
+            print('time: ', config.stream.TPV['time'])
+            print('Lat: ', config.stream.TPV['lat'])
