@@ -65,6 +65,7 @@ def main():
 
 	window.add(canvas)
 	window.add(text)
+	window.pack()
 
 	config.gui = GPS_Print.GPS_Print()
 	readThread = GPS_Start.GPS_Start()
