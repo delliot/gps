@@ -82,4 +82,4 @@ class GPS_Start(threading.Thread):
 		while self.running:
 			if config.gpsd.waiting():
 				config.gpsd.next()
-			time.sleep(5)
+			time.sleep(2)

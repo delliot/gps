@@ -25,10 +25,11 @@ from gps import *
 from time import *
 import time
 import threading
+import tkinter
 import config
 import math
 
-class GPS_Print(object):
+class GPS_Print(threading.Thread):
 	'''
 	/*--------------------------------------------------------------------------------------------------------------------
 	-- FUNCTION:		__init__
@@ -51,8 +52,8 @@ class GPS_Print(object):
 	'''
 	"""docstring for GPS_Print"""
 	def __init__(self):
-		#global gpsd
-		f = 0
+		super(GPS_Print, self).__init__()
+		self.running = True
 
 	'''
 	/*--------------------------------------------------------------------------------------------------------------------
@@ -103,19 +104,37 @@ class GPS_Print(object):
 	-- This is the printing method that prints out the gps coordinates and data.
 	----------------------------------------------------------------------------------------------------------------------*/
 	'''
-	def GPS_Print(self, gpsd):
-		os.system('clear')
-		print '----------GPS data----------'
-		print 'Time (UTC):    ' , gpsd.utc,' + ', gpsd.fix.time
-		print 'Latitude:    ' , self.convertTODMS(gpsd.fix.latitude)
-		print 'Longitude:   ' , self.convertTODMS(gpsd.fix.longitude)
-		print 'Elevation (m): ' , gpsd.fix.altitude
-		print 'Satellites: ' , gpsd.satellites
-		for i in gpsd.satellites:
-			print '\t', i
-		#print 'PRN: ' , gpsd.fix.PRN
-		#print 'Azimuth: ' , gpsd.fix.Azimuth
-		#print 'SNR: ' , gpsd.fix.SNR
-		#print 'Used flag: ' , gpsd.fix.used
+	def run(self, gpsd):
+		while self.running:
+			os.system('clear')
+			print '----------GPS data----------'
+			print 'Time (UTC):    ', gpsd.utc, ' + ', gpsd.fix.time
+			print 'Latitude:    ', self.convertTODMS(gpsd.fix.latitude)
+			print 'Longitude:   ', self.convertTODMS(gpsd.fix.longitude)
+			print 'Elevation (m): ', gpsd.fix.altitude
+			print 'Satellites: ', gpsd.satellites
+			for i in gpsd.satellites:
+				print '\t', i
+			# print 'PRN: ' , gpsd.fix.PRN
+			# print 'Azimuth: ' , gpsd.fix.Azimuth
+			# print 'SNR: ' , gpsd.fix.SNR
+			# print 'Used flag: ' , gpsd.fix.used
+
+
+			config.textBox.delete(1.0,tkinter.END)
+			config.textBox.configre(state="ENABLED")
+			config.textBox.add('----------GPS data----------')
+			config.textBox.add('Time (UTC):    ', gpsd.utc, ' + ', gpsd.fix.time)
+			config.textBox.add('Latitude:    ', self.convertTODMS(gpsd.fix.latitude))
+			config.textBox.add('Longitude:   ', self.convertTODMS(gpsd.fix.longitude))
+			config.textBox.add('Elevation (m): ', gpsd.fix.altitude)
+			config.textBox.add('Satellites: ', gpsd.satellites)
+			for i in gpsd.satellites:
+				config.textBox.add('\t', i)
+
+			config.textBox.configre(state="DISABLED")
+			time.sleep(.5)
+
+
 
 

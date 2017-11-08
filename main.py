@@ -23,7 +23,7 @@ import os
 from gps import *
 from time import *
 import time
-import threading
+import tkinter
 import config
 import GPS_Start
 import GPS_Print
@@ -52,17 +52,32 @@ import GPS_Print
 def main():
 	global gpsd
 	print('START')
+
+	top = tkinter.Tk()
+	window = tkinter.PanedWindow(top, orient=tkinter.VERTICAL)
+	canvas = tkinter.Canvas(top, width=config.width, height=config.height)
+	bg = tkinter.PhotoImage(file='map1024x512.gif')
+
+	canvas.create_image((config.width/2), (config.height/2), image=bg)
+	text = tkinter.Text(top)
+	text.configure(state="disabled")
+	config.textBox = text
+
+
+	window.add(canvas)
+	window.add(text)
+
 	printGPS = GPS_Print.GPS_Print()
 	readThread = GPS_Start.GPS_Start()
 	readThread.start()
-	time.sleep(1)
-	try:
-		while True:
-			printGPS.GPS_Print(config.gpsd)
-			time.sleep(.5)
-	except(KeyboardInterrupt, SystemExit):
-  		readThread.running = False
-  		readThread.join()
-  		print ' Exit Successful '
+	printGPS.start()
+
+	top.mainloop()
+
+	readThread.running = False
+	printGPS.running = False
+	printGPS.join()
+	readThread.join()
+
 if __name__=="__main__":
 	main()
