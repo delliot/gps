@@ -79,9 +79,9 @@ class GPS_Print(threading.Thread):
 	def convertTODMS(self, lat, latlong):
 		if not math.isnan(lat):
 			directionLat = ''
-                        if latlong == 0:
+			if latlong == 0:
 				directionLat = ' N' if lat > 0 else ' S'
-                        else:
+			else:
 				directionLat = ' E' if lat > 0 else ' W'
 			dd = int(lat)
 			mm = int((lat-int(lat))*60)
@@ -111,6 +111,8 @@ class GPS_Print(threading.Thread):
 	'''
 	def run(self, gpsd):
 		while self.running:
+			print('time: ', config.stream.TPV['time'])
+			print('Lat: ', config.stream.TPV['lat'])
 '''
                     os.system('clear')
 			config.textBox.configre(state="ENABLED")
@@ -138,5 +140,4 @@ class GPS_Print(threading.Thread):
 	        	for i in gpsd.satellites:
 		        	print ('\t', i)
 ''' 
-            print('time: ', config.stream.TPV['time'])
-            print('Lat: ', config.stream.TPV['lat'])
+
