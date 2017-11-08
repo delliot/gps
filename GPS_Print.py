@@ -51,7 +51,6 @@ class GPS_Print(object):
 	'''
 	"""docstring for GPS_Print"""
 	def __init__(self):
-		#global gpsd
 		f = 0
 
 	'''
@@ -75,14 +74,19 @@ class GPS_Print(object):
 	-- Minutes and Seconds.
 	----------------------------------------------------------------------------------------------------------------------*/
 	'''
-	def convertTODMS(self, lat):
+	def convertTODMS(self, lat, latlong):
 		if not math.isnan(lat):
+			directionLat = ''
+			if latlong == 0
+				directionLat = ' N' if lat > 0 else ' S'
+			else
+				directionLat = ' E' if lat > 0 else ' W'
 			dd = int(lat)
 			mm = int((lat-int(lat))*60)
 			ss = (((lat-int(lat))*60) - mm) * 60
-			print 'Degrees: ' + str(dd) + ' minutes: ' + str(mm) + ' seconds: ' + str(ss)
+			print ('Degrees: ' + str(dd) + ' minutes: ' + str(mm) + ' seconds: ' + str(ss) + directionLat)
 		else:
-			print 'not available'
+			print ('not available')
 	'''
 	/*--------------------------------------------------------------------------------------------------------------------
 	-- FUNCTION:		GPS_Print
@@ -105,17 +109,16 @@ class GPS_Print(object):
 	'''
 	def GPS_Print(self, gpsd):
 		os.system('clear')
-		print '----------GPS data----------'
-		print 'Time (UTC):    ' , gpsd.utc,' + ', gpsd.fix.time
-		print 'Latitude:    ' , self.convertTODMS(gpsd.fix.latitude)
-		print 'Longitude:   ' , self.convertTODMS(gpsd.fix.longitude)
-		print 'Elevation (m): ' , gpsd.fix.altitude
-		print 'Satellites: ' , gpsd.satellites
+		
+		print ('----------GPS data----------')
+		print ('Time (UTC):    ' , gpsd.utc,' + ', gpsd.fix.time)
+		print ('Latitude:    ' , self.convertTODMS(gpsd.fix.latitude, 0))
+		print ('Longitude:   ' , self.convertTODMS(gpsd.fix.longitude, 1))
+		print ('Elevation (m): ' , gpsd.fix.altitude)
+		print ('Speed m/s      ' , gpsd.fix.speed)
+		print ('Climb          ' , gpsd.fix.climb)
+		print ('Track          ' , gpsd.fix.track)
+		print ('Mode           ' , gpsd.fix.mode)
 		for i in gpsd.satellites:
-			print '\t', i
-		#print 'PRN: ' , gpsd.fix.PRN
-		#print 'Azimuth: ' , gpsd.fix.Azimuth
-		#print 'SNR: ' , gpsd.fix.SNR
-		#print 'Used flag: ' , gpsd.fix.used
-
-
+			print ('\t', i)
+			

@@ -51,7 +51,6 @@ import GPS_Print
 
 def main():
 	global gpsd
-	print('START')
 	printGPS = GPS_Print.GPS_Print()
 	readThread = GPS_Start.GPS_Start()
 	readThread.start()
@@ -63,6 +62,6 @@ def main():
 	except(KeyboardInterrupt, SystemExit):
   		readThread.running = False
   		readThread.join()
-  		print ' Exit Successful '
+  		print (' Exit Successful ')
 if __name__=="__main__":
 	main()
