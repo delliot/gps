@@ -77,7 +77,7 @@ class GPS_Print(object):
 	-- Minutes, Seconds and directions.
 	----------------------------------------------------------------------------------------------------------------------*/
 	'''
-	def convertTODMS(self, lat, latlong):
+	def convertToDMS(self, lat, latlong):
 		if not lat == 'n/a':
 			directionLat = ''
 			if latlong == 0:
@@ -112,7 +112,7 @@ class GPS_Print(object):
 	'''
 	def updateGui(self, data):
 		print('Time: ', data.TPV['time'])
-		print('Latitude: ', self.convertTODMS(data.TPV['lat'], 0))
+		print('Latitude: ', self.convertToDMS(data.TPV['lat'], 0))
 		print('Longitude: ', self.convertToDMS(data.TPV['lon'], 1))
 		print('Elevation (m): ', data.TPV['alt'])
 		print('Speed (m/s): ', data.TPV['speed'])
