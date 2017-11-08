@@ -118,11 +118,11 @@ class GPS_Print(object):
 
 
 
-		config.textBox.configre(state="NORMAL")
+		config.textBox.configure(state="normal")
 		config.textBox.delete('1.0', tkinter.END)
 		config.textBox.add(tkinter.END, '----------GPS data----------')
 		config.textBox.add(tkinter.END, 'Time (UTC):    ' + data.TPV['time'])
-		config.textBox.configre(state="DISABLED")
+		config.textBox.configure(state="disabled")
 
 		'''
 			config.textBox.add('Latitude:    ', self.convertTODMS(gpsd.fix.latitude))
