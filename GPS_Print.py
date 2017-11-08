@@ -111,42 +111,22 @@ class GPS_Print(object):
 	----------------------------------------------------------------------------------------------------------------------*/
 	'''
 	def updateGui(self, data):
-		print('time: ', data.TPV['time'])
-		print('Lat: ', data.TPV['lat'])
+		print('Time: ', data.TPV['time'])
+		print('Latitude: ', self.convertTODMS(data.TPV['lat'], 0)
+		print('Longitude: ', self.convertToDMS(data.TPV['lon'], 1)
+		print('Elevation (m): ', data.TPV['alt'])
+		print('Speed (m/s): ', data.TPV['speed'])
+		print('Climb: ', data.TPV['climb'])
+		for i in data.SKY['satellites']:
+			print('\t', i)
 		if data.TPV['lat'] != "n/a" and data.TPV['lon'] != "n/a":
 			plotOnCanvas(config.canvas, data.TPV['lon'], data.TPV['lat'])
-
-
 
 		config.textBox.configure(state="normal")
 		config.textBox.delete('1.0', tkinter.END)
 		config.textBox.insert(tkinter.END, '----------GPS data----------')
 		config.textBox.insert(tkinter.END, 'Time (UTC):    ' + data.TPV['time'])
 		config.textBox.configure(state="disabled")
-
-		'''
-			config.textBox.add('Latitude:    ', self.convertTODMS(gpsd.fix.latitude))
-			config.textBox.add('Longitude:   ', self.convertTODMS(gpsd.fix.longitude))
-			config.textBox.add('Elevation (m): ', gpsd.fix.altitude)
-			config.textBox.add('Satellites: ', gpsd.satellites)
-			for i in gpsd.satellites:
-				config.textBox.add('\t', i)
-
-			
-			time.sleep(.5)
-
-	        	print ('----------GPS data----------')
-	        	print ('Time (UTC):    ' , gpsd.utc,' + ', gpsd.fix.time)
-	        	print ('Latitude:    ' , self.convertTODMS(gpsd.fix.latitude, 0))
-	        	print ('Longitude:   ' , self.convertTODMS(gpsd.fix.longitude, 1))
-	        	print ('Elevation (m): ' , gpsd.fix.altitude)
-	        	print ('Speed m/s      ' , gpsd.fix.speed)
-	        	print ('Climb          ' , gpsd.fix.climb)
-	        	print ('Track          ' , gpsd.fix.track)
-	        	print ('Mode           ' , gpsd.fix.mode)
-	        	for i in gpsd.satellites:
-		        	print ('\t', i)
-''' 
 
 def toWebMercator(xLon, yLat):
 	m_lon = deg2rad(xLon)
