@@ -113,6 +113,7 @@ class GPS_Print(object):
 	-- This method updates the gui and is called each time the gps read thread gets new data. 
 	-- It updates the canvas and text elements. The canvas element is called by plotOnCanvas 
 	-- method which is called here. 
+	-- It also prints all information to the console, if you wish to redirect output to a file. 
 	----------------------------------------------------------------------------------------------------------------------*/
 	'''
 	def updateGui(self, data):
@@ -149,21 +150,85 @@ class GPS_Print(object):
 			config.textBox.insert(tkinter.END, 'No Satellites \n')
 		config.textBox.configure(state="disabled")
 
-
-
+	'''
+		/*--------------------------------------------------------------------------------------------------------------------
+		-- FUNCTION:		toWebMercator
+		--
+		-- DATE:			November 7, 2017
+		--
+		-- REVISIONS:		N/A
+		--
+		-- DESIGNER:		Delan Elliot 
+		--
+		-- PROGRAMMER:		Delan Elliot
+		--
+		-- INTERFACE:		toWebMercator(self, xLon, yLat)
+		-- 					
+		--						xLon: longitude in decimal degrees
+		--						yLat: latitude in decimal degrees
+		--
+		-- RETURNS:			void
+		--
+		-- NOTES:
+		-- In order to properly project gps coordinates on a map, we transform them in the webmercator projection. This is 
+		-- necessary because almost all publicly available mapping tools are built for webmercator. 
+		-- This equation relies on: the height of your projection, and the relative zoom of the projection. In this 
+		-- implementation the zoom is hardcoded at 1.
+		-- x = (height / 2 / pi) * 2 ^ zoom * (lon in radians + pi)
+		-- y = (height / 2 / pi) * 2 ^ zoom * (pi - ln( tan((pi/4) + (Lat in radians / 2)))
+		----------------------------------------------------------------------------------------------------------------------*/
+		'''
 	def toWebMercator(self, xLon, yLat):
 		m_lon = deg2rad(xLon)
 		m_lat= deg2rad(yLat)
 
 
-		x = int((256 / pi) * 2 * (m_lon + pi))
-		y = int(((256 / pi) * 2) * (pi - log((tan(pi / 4 + m_lat / 2)))))
+		x = int((config.height / 2 / pi) * 2 * (m_lon + pi))
+		y = int(((config.height / 2 / pi) * 2) * (pi - log((tan(pi / 4 + m_lat / 2)))))
 
 		return x, y
 
+	'''
+			/*--------------------------------------------------------------------------------------------------------------------
+			-- FUNCTION:		plotOnCanvas
+			--
+			-- DATE:			November 7, 2017
+			--
+			-- REVISIONS:		N/A
+			--
+			-- DESIGNER:		Delan Elliot 
+			--
+			-- PROGRAMMER:		Delan Elliot
+			--
+			-- INTERFACE:		plotOnCanvas(self, canvas, x, y)
+			-- 					
+			--						canvas: the canvas on which to display the location
+			--						x: the mercator projected coordinate for longitude
+			--						y: the mercator projected coordinate for latitude
+			--
+			-- RETURNS:			void
+			--
+			-- NOTES:
+			-- In this function, the mercator projection is used along with the height and mercator projection of the centre in
+			-- order to plot the location on the map. 
+			--
+			-- -----------------------------------
+			-- |	z							 |
+			-- |	  P   y						 |
+			-- |				x				 |
+			-- |								 |
+			-- |								 |
+			-- -----------------------------------
+			--
+			-- In a rough sketch, if you are trying to plot point P, it would return mercator projection at point z.
+			-- you would add the value of x, and subtract the value of y, where y is the mercator projection of coord 0,0.
+			--
+			-- An oval is projected over your approximate location with these coordinates.
+			----------------------------------------------------------------------------------------------------------------------*/
+	'''
 	def plotOnCanvas(self, canvas, x, y):
 
 		pixels = self.toWebMercator(x, y)
 		center = self.toWebMercator(0,0)
-		pos = int(pixels[0] - center[0] + 500), int(pixels[1] - center[1] + 256)
-		canvas.create_oval(pos[0], pos[1], pos[0] + 20, pos[1] + 20)
+		pos = int(pixels[0] - center[0] + (config.width /2)), int(pixels[1] - center[1] + (config.height/2))
+		canvas.create_oval(pos[0] - 20, pos[1] - 20, pos[0], pos[1], fill="#B22222")
