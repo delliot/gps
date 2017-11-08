@@ -26,6 +26,7 @@ from time import *
 import time
 import threading
 import config
+import math
 
 class GPS_Print(object):
 	'''
@@ -74,12 +75,14 @@ class GPS_Print(object):
 	-- Minutes and Seconds.
 	----------------------------------------------------------------------------------------------------------------------*/
 	'''
-	def convertTODMS(lat):
-		dd = int(lat)
-		mm = int((lat-int(lat))*60)
-		ss = (((lat-int(lat))*60) - mm) * 60
-		return ' Degrees: ' + str(dd) + ' minutes: ' + str(mm) + ' seconds: ' + str(ss)
-	
+	def convertTODMS(self, lat):
+		if not math.isnan(lat):
+			dd = int(lat)
+			mm = int((lat-int(lat))*60)
+			ss = (((lat-int(lat))*60) - mm) * 60
+			print 'Degrees: ' + str(dd) + ' minutes: ' + str(mm) + ' seconds: ' + str(ss)
+		else:
+			print 'not available'
 	'''
 	/*--------------------------------------------------------------------------------------------------------------------
 	-- FUNCTION:		GPS_Print
@@ -101,17 +104,16 @@ class GPS_Print(object):
 	----------------------------------------------------------------------------------------------------------------------*/
 	'''
 	def GPS_Print(self, gpsd):
-			#os.system('clear')
-			
-			print ' GPS data '
-	  		print 'Time (UTC):    ' , gpsd.utc,' + ', gpsd.fix.time
-	  		print 'Latitude:    ' , convertTODMS(gpsd.fix.latitude)
-	  		print 'Longitude:   ' , convertTODMS(gpsd.fix.longitude)
-	  		print 'Elevation (m): ' , gpsd.fix.altitude
-			print 'Satellites: ' , gpsd.satellites
-	  		#print 'PRN: ' , gpsd.fix.PRN
-	  		#print 'Azimuth: ' , gpsd.fix.Azimuth
-	  		#print 'SNR: ' , gpsd.fix.SNR
-	  		#print 'Used flag: ' , gpsd.fix.used
+		os.system('clear')
+		print '----------GPS data----------'
+		print 'Time (UTC):    ' , gpsd.utc,' + ', gpsd.fix.time
+		print 'Latitude:    ' , self.convertTODMS(gpsd.fix.latitude)
+		print 'Longitude:   ' , self.convertTODMS(gpsd.fix.longitude)
+		print 'Elevation (m): ' , gpsd.fix.altitude
+		print 'Satellites: ' , gpsd.satellites
+		#print 'PRN: ' , gpsd.fix.PRN
+		#print 'Azimuth: ' , gpsd.fix.Azimuth
+		#print 'SNR: ' , gpsd.fix.SNR
+		#print 'Used flag: ' , gpsd.fix.used
 
 

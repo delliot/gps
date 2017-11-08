@@ -56,11 +56,11 @@ def main():
 	readThread = GPS_Start.GPS_Start()
 	readThread.start()
 	time.sleep(1)
-    try:
+	try:
 		while True:
 			printGPS.GPS_Print(config.gpsd)
 			time.sleep(.5)
-    except(KeyboardInterrupt, SystemExit):
+	except(KeyboardInterrupt, SystemExit):
   		readThread.running = False
   		readThread.join()
   		print ' Exit Successful '
