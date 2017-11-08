@@ -39,7 +39,7 @@ class GPS_Print(object):
 	--
 	-- DESIGNER:		Delan Elliot and Roger Zhang
 	--
-	-- PROGRAMMER:		Delan Elliot and Roger Zhang
+	-- PROGRAMMER:		Roger Zhang
 	--
 	-- INTERFACE:		__init__(self)
 	--
@@ -63,15 +63,15 @@ class GPS_Print(object):
 	--
 	-- DESIGNER:		Delan Elliot and Roger Zhang
 	--
-	-- PROGRAMMER:		Delan Elliot and Roger Zhang
+	-- PROGRAMMER:		Roger Zhang
 	--
 	-- INTERFACE:		convertTODMS(float)
 	--
 	-- RETURNS:			String
 	--
 	-- NOTES:
-	-- This is the conversion function that converts the latitude/longitude to Degrees
-	-- Minutes and Seconds.
+	-- This is the conversion function that converts the latitude/longitude to Degrees,
+	-- Minutes, Seconds and directions.
 	----------------------------------------------------------------------------------------------------------------------*/
 	'''
 	def convertTODMS(self, lat, latlong):
@@ -97,7 +97,7 @@ class GPS_Print(object):
 	--
 	-- DESIGNER:		Delan Elliot and Roger Zhang
 	--
-	-- PROGRAMMER:		Delan Elliot and Roger Zhang
+	-- PROGRAMMER:		Roger Zhang
 	--
 	-- INTERFACE:		GPS_Print(self, GPS_Object)
 	--
@@ -108,7 +108,7 @@ class GPS_Print(object):
 	----------------------------------------------------------------------------------------------------------------------*/
 	'''
 	def GPS_Print(self, gpsd):
-		os.system('clear')
+		#os.system('clear')
 		
 		print ('----------GPS data----------')
 		print ('Time (UTC):    ' , gpsd.utc,' + ', gpsd.fix.time)

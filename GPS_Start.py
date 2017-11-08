@@ -13,7 +13,7 @@
 --
 -- DESIGNER:		Delan Elliot, Roger Zhang
 --
--- PROGRAMMER:		Delan Elliot, Roger Zhang
+-- PROGRAMMER:		Roger Zhang
 --
 -- NOTES:
 -- This is the gps reading class, it starts as a seperate thread and keeping reading for
@@ -39,7 +39,7 @@ class GPS_Start(threading.Thread):
 	--
 	-- DESIGNER:		Delan Elliot and Roger Zhang
 	--
-	-- PROGRAMMER:		Delan Elliot and Roger Zhang
+	-- PROGRAMMER:		Roger Zhang
 	--
 	-- INTERFACE:		__init__(self)
 	--
@@ -66,15 +66,15 @@ class GPS_Start(threading.Thread):
 	--
 	-- DESIGNER:		Delan Elliot and Roger Zhang
 	--
-	-- PROGRAMMER:		Delan Elliot and Roger Zhang
+	-- PROGRAMMER:		Roger Zhang
 	--
 	-- INTERFACE:		run(self)
 	--
 	-- RETURNS:			void
 	--
 	-- NOTES:
-	-- This is the background running function. The running method will keep checking and update the gps object.
-	-- Timer is set to be 5 seconds.
+	-- The running method will keep checking and update the gps object in the background, if there is new data available
+	-- update the gps object, the timer is set to be every 5 seconds.
 	----------------------------------------------------------------------------------------------------------------------*/
 	'''
 	def run(self):
